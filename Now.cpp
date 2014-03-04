@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#define version "1.01"
+#define version "1.02"
 
 float Get_seconds_of_current_day();
 float Get_current_rotation_angle(float day_seconds);
@@ -50,7 +50,7 @@ float Get_seconds_of_current_day()
 	time(&rawtime);
 	ptm = gmtime(&rawtime);
 	seconds += (ptm->tm_hour)*3600;	
-	seconds += (ptm->tm_min + 30)*60;
+	seconds += (ptm->tm_min + 24)*60;
 	seconds += ptm->tm_sec;	
 	return seconds;
 }
