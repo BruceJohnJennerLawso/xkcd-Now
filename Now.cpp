@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#define version "1.00"
+#define version "1.01"
 
 float Get_seconds_of_current_day();
 float Get_current_rotation_angle(float day_seconds);
@@ -12,7 +12,7 @@ float Get_current_rotation_angle(float day_seconds);
 struct tm * ptm;
 
 int main()
-{	std::string title = "Now ";
+{	std::string title = "xkcd-Now ";
 	title.append(version);
 	sf::RenderWindow window(sf::VideoMode(600, 599), title);
 	sf::Texture overlay_tex;	sf::Sprite Overlay_sprite;		
@@ -50,7 +50,7 @@ float Get_seconds_of_current_day()
 	time(&rawtime);
 	ptm = gmtime(&rawtime);
 	seconds += (ptm->tm_hour)*3600;	
-	seconds += (ptm->tm_min)*60;
+	seconds += (ptm->tm_min + 30)*60;
 	seconds += ptm->tm_sec;	
 	return seconds;
 }
