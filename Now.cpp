@@ -2,9 +2,11 @@
 // By John Lawson //////////////////////////////////////////////////////////
 // Based on the Now comic by XKCD //////////////////////////////////////////
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 #include <iostream>
 
-#define version "1.02"
+#define version "1.03"
 
 float Get_seconds_of_current_day();
 float Get_current_rotation_angle(float day_seconds);
@@ -23,10 +25,9 @@ int main()
 	Spinner_sprite.setPosition(300, 299.5);
 	sf::RectangleShape Background(sf::Vector2f(600, 599));
 	Background.setFillColor(sf::Color::White);
-	std::cout << Get_seconds_of_current_day() << std::endl;
-	std::cout << Get_current_rotation_angle(Get_seconds_of_current_day()) << std::endl;
+	const sf::Vector2u WSize(600,599);
 	while (window.isOpen())
-	{	window.setSize(sf::Vector2u(600, 599));
+	{	window.setSize(WSize);
 		Spinner_sprite.setRotation(Get_current_rotation_angle(Get_seconds_of_current_day()));
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -40,7 +41,7 @@ int main()
 		window.draw(Overlay_sprite);
 		window.draw(Spinner_sprite);
 		window.display();
-	}
+	}	
 	return 0;
 }
 
