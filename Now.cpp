@@ -6,10 +6,12 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 
-#define version "1.03"
+#define version "1.04"
 
 float Get_seconds_of_current_day();
 float Get_current_rotation_angle(float day_seconds);
+
+sf::Clock * dt_timer;
 
 struct tm * ptm;
 
@@ -26,22 +28,35 @@ int main()
 	sf::RectangleShape Background(sf::Vector2f(600, 599));
 	Background.setFillColor(sf::Color::White);
 	const sf::Vector2u WSize(600,599);
+	dt_timer = new sf::Clock();
+	long double dt = 0;
+	Spinner_sprite.setRotation(Get_current_rotation_angle(Get_seconds_of_current_day()));
+	window.clear();
+	window.draw(Background);
+	window.draw(Overlay_sprite);
+	window.draw(Spinner_sprite);	
 	while (window.isOpen())
-	{	window.setSize(WSize);
-		Spinner_sprite.setRotation(Get_current_rotation_angle(Get_seconds_of_current_day()));
+	{	sf::Time Elapsed_time;
+		Elapsed_time = dt_timer->restart();
+		dt += Elapsed_time.asSeconds();
+		window.setSize(WSize);
 		sf::Event event;
 		while (window.pollEvent(event))
 		{	if (event.type == sf::Event::Closed)
 			{	window.close();
 			}
         }
-
-		window.clear();
-		window.draw(Background);
-		window.draw(Overlay_sprite);
-		window.draw(Spinner_sprite);
+		if(dt >= 4.000000000000000000000)
+		{	dt = 0.000000000000000000000;
+			Spinner_sprite.setRotation(Get_current_rotation_angle(Get_seconds_of_current_day()));
+			window.clear();
+			window.draw(Background);
+			window.draw(Overlay_sprite);
+			window.draw(Spinner_sprite);
+			window.display();
+		}
 		window.display();
-	}	
+	}	delete dt_timer;
 	return 0;
 }
 

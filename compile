@@ -1,0 +1,5 @@
+#!/bin/bash
+
+g++ -c -std=c++0x Now.cpp
+
+exit 0

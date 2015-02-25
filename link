@@ -1,0 +1,5 @@
+#!/bin/bash
+
+g++ Now.o -o xkcd-Now -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+
+exit 0
