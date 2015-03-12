@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo cp -i xkcd-Now /usr/bin
+sudo cp -i -R xkcd_now /usr/share
+
+exit 0
